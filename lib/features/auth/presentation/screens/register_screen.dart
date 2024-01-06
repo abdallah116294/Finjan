@@ -1,6 +1,6 @@
 import 'package:finjan/core/utils/appcolor.dart';
-import 'package:finjan/features/auth/widgets/custom_button.dart';
-import 'package:finjan/features/auth/widgets/textformfieldwidget.dart';
+import 'package:finjan/features/auth/presentation/widgets/custom_button.dart';
+import 'package:finjan/features/auth/presentation/widgets/textformfieldwidget.dart';
 import 'package:flutter/material.dart';
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:finjan/core/utils/appcolor.dart';
-import 'package:finjan/features/auth/screens/register_screen.dart';
+import 'package:finjan/features/auth/presentation/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 class SplashScreen extends StatefulWidget {
