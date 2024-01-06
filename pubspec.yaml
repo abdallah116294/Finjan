@@ -49,8 +49,7 @@ flutter_native_splash:
   color: "#846046"
   image: assets/splash.png
   android: true
-  ios: true    
-
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

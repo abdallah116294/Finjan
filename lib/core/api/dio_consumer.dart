@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:finjan/core/api/api_consumer.dart';
+import 'package:finjan/core/api/api_endpoints.dart';
 import 'package:finjan/core/api/api_interceptors.dart';
 import 'package:finjan/core/api/status_code.dart';
 import 'package:finjan/core/error/exception.dart';
@@ -11,11 +12,11 @@ import 'package:flutter/foundation.dart';
 class DioConsumer implements ApiConsumer {
   final Dio client;
   DioConsumer(
-    String baseUrl, {
+    {
     required this.client,
   }) {
     client.options
-      ..baseUrl = baseUrl
+      ..baseUrl = APIEndPoints.authBasurl
       ..responseType = ResponseType.plain
       ..validateStatus = (status) {
         return status! < StatusCode.internalServerError;
@@ -40,7 +41,7 @@ class DioConsumer implements ApiConsumer {
       {Map<String, dynamic>? body,
       Map<String, dynamic>? queryParameters}) async {
     try {
-      final response = await client.post(path, data: {body});
+      final response = await client.post(path, data: body);
       return _handleResponseAsJson(response);
     } on DioException catch (error) {
       _handleDioError(error);
