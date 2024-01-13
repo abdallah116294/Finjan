@@ -1,8 +1,12 @@
 import 'package:finjan/core/utils/appcolor.dart';
 import 'package:finjan/features/auth/data/model/UserRegister_model.dart';
+import 'package:finjan/features/auth/domain/entities/user_entity.dart';
+import 'package:finjan/features/auth/presentation/cubit/cubit/sign_up_cubit.dart';
 import 'package:finjan/features/auth/presentation/cubit/register_cubit.dart';
 import 'package:finjan/features/auth/presentation/widgets/custom_button.dart';
 import 'package:finjan/features/auth/presentation/widgets/textformfieldwidget.dart';
+import 'package:finjan/features/home/presentation/screens/home.dart';
+import 'package:finjan/features/layout/screens/layout_screen.dart';
 import 'package:finjan/features/splash/screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,19 +29,20 @@ class RegisterScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: BlocConsumer<RegisterCubit, RegisterState>(
+            child: BlocConsumer<SignUpCubit, SignUpState>(
               listener: (context, state) {
-                if (state is ReisterIsLoading) {
-                  Center(
+                if (state is UserLoading) {
+                  const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is RegisterError) {
+                } else if (state is UserFailure) {
                   debugPrint(state.error.toString());
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.error.toString())));
-                } else if (state is RegisterLoaded) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const SplashScreen()));
+                } else if (state is UserSucess) {
+                  HomeScreen(name: _nameController.text);
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LayoutScreen()));
                 }
               },
               builder: (cotext, state) {
@@ -142,12 +147,22 @@ class RegisterScreen extends StatelessWidget {
                               backgroundColor: Colors.white,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  di.sl<RegisterCubit>().register(
-                                      UserRegisterModel(
-                                          name: _nameController.text,
-                                          email: _emailController.text,
-                                          password: _passwordController.text,
-                                          phone: _phoneController.text));
+                                  di
+                                      .sl<SignUpCubit>()
+                                      .submitSignUp(
+                                          userEntity: UserEntity(
+                                        email: _emailController.text,
+                                        password: _passwordController.text,
+                                        name: _nameController.text,
+                                        uid: '',
+                                        status: 'I am new User for this coffe ',
+                                      ))
+                                      .then((value) {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LayoutScreen()));
+                                  });
                                 }
                               },
                               child: const Icon(

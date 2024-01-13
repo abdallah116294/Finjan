@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "749568293308",
+    "project_id": "finjan-e1dbb",
+    "storage_bucket": "finjan-e1dbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749568293308:android:b8ee2cbcf885122169d3b9",
+        "android_client_info": {
+          "package_name": "com.example.finjan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABpeYo8CEKf6DDy_C9uEkPg-uIXMYblzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

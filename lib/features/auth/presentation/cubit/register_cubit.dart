@@ -21,6 +21,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     } catch (error) {
       emit(RegisterError(error: error.toString()));
     }
+    
   }
 
   String _mapFailureToMsg(Failure failure) {

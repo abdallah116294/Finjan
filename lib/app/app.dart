@@ -1,4 +1,7 @@
+import 'package:finjan/features/auth/presentation/cubit/cubit/sign_up_cubit.dart';
 import 'package:finjan/features/auth/presentation/cubit/register_cubit.dart';
+import 'package:finjan/features/home/presentation/cubit/get_coffe_cubit.dart';
+import 'package:finjan/features/layout/screens/layout_screen.dart';
 import 'package:finjan/features/splash/screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +14,12 @@ static const  MyApp _instance =  MyApp._internal();
   @override
   Widget build(BuildContext context) {
     return   MultiBlocProvider(providers: [
-      BlocProvider(create: (context)=>di.sl<RegisterCubit>())
-    ], child: const MaterialApp(
+      BlocProvider(create: (context)=>di.sl<RegisterCubit>()),
+      BlocProvider(create: (context)=>di.sl<SignUpCubit>()),
+      BlocProvider(create: (context)=>di.sl<GetCoffeCubit>()..getHotCoffe())
+    ], child:   MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:SplashScreen()  ,
+      home:LayoutScreen()  ,
     ));
   }
 }

@@ -16,7 +16,7 @@ class DioConsumer implements ApiConsumer {
     required this.client,
   }) {
     client.options
-      ..baseUrl = APIEndPoints.authBasurl
+      ..baseUrl = APIEndPoints.coffeUrl
       ..responseType = ResponseType.plain
       ..validateStatus = (status) {
         return status! < StatusCode.internalServerError;

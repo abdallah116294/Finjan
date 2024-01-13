@@ -1,27 +1,62 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:finjan/core/api/api_consumer.dart';
+import 'package:finjan/core/api/api_get.dart';
 import 'package:finjan/core/api/api_interceptors.dart';
 import 'package:finjan/core/api/dio_consumer.dart';
+import 'package:finjan/features/auth/data/data/firebase_data_source/firebase_data_source.dart';
+import 'package:finjan/features/auth/data/data/firebase_data_source/firebase_data_source_impl.dart';
 import 'package:finjan/features/auth/data/data/remote_data.dart';
+import 'package:finjan/features/auth/data/repository/fireabse_repo_imp.dart';
 import 'package:finjan/features/auth/data/repository/register_repo_impl.dart';
+import 'package:finjan/features/auth/domain/repository/firebase_repository.dart';
 import 'package:finjan/features/auth/domain/repository/register_repo.dart';
+import 'package:finjan/features/auth/domain/usecase/get_create_curren_usecase.dart';
 import 'package:finjan/features/auth/domain/usecase/register_usecase.dart';
+import 'package:finjan/features/auth/domain/usecase/sign_up_usecase.dart';
+import 'package:finjan/features/auth/presentation/cubit/cubit/sign_up_cubit.dart';
 import 'package:finjan/features/auth/presentation/cubit/register_cubit.dart';
+import 'package:finjan/features/home/data/remote_data/remote_data.dart';
+import 'package:finjan/features/home/data/repository/get_coffe_repo_impl.dart';
+import 'package:finjan/features/home/domain/repository/get_coffe_Repository.dart';
+import 'package:finjan/features/home/domain/usecase/get_coffe_usecase.dart';
+import 'package:finjan/features/home/presentation/cubit/get_coffe_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 Future<void> init() async {
   //bloc
   sl.registerFactory<RegisterCubit>(() => RegisterCubit(registerUseCase: sl()));
+  sl.registerFactory<SignUpCubit>(() =>
+      SignUpCubit(signUPUsecase: sl(), getCreateCurrentUserUsecase: sl()));
+  sl.registerFactory<GetCoffeCubit>(() => GetCoffeCubit(usecase: sl()));
   //usecase
   sl.registerLazySingleton<RegisterUseCase>(
       () => RegisterUseCase(registerRepository: sl()));
+  sl.registerLazySingleton<GetCoffeUsecase>(
+      () => GetCoffeUsecase(repository: sl()));
+  sl.registerLazySingleton<SignUPUsecase>(
+      () => SignUPUsecase(repository: sl()));
+  sl.registerLazySingleton<GetCreateCurrentUserUsecase>(
+      () => GetCreateCurrentUserUsecase(repository: sl()));
   //repository
   sl.registerLazySingleton<RegisterRepository>(
       () => RegisterRepositoryImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<FirebaseRemoteDataSource>(
+      () => FirebaseRemoteDataSourceImpl(auth: sl(), firestore: sl()));
+  sl.registerLazySingleton<FirebaseRepository>(
+      () => FirebaseRepositoryImp(remoteDataSource: sl()));
+  sl.registerLazySingleton<GetCoffeRepository>(
+      () => GetCoffeRepositoryImpl(remoteData: sl()));
+  //sl.registerLazySingleton(() => );
   //remote data source
-  sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(apiConsumer: sl()));
+  sl.registerLazySingleton<RemoteDataSource>(
+      () => RemoteDataSourceImpl(apiConsumer: sl()));
+  sl.registerLazySingleton<RemoteData>(() => RemoteDataImpl(apiConsumer: sl(),dioHelper: sl()));
   //Api
+  // sl.registerLazySingleton(() => Dio());
+  sl.registerLazySingleton(() => DioHelper(sl()));
   sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));
   sl.registerLazySingleton(() => AppInterceptors());
@@ -32,4 +67,9 @@ Future<void> init() async {
       responseBody: true,
       responseHeader: true,
       error: true));
+  final auth = FirebaseAuth.instance;
+  final fireStore = FirebaseFirestore.instance;
+
+  sl.registerLazySingleton(() => auth);
+  sl.registerLazySingleton(() => fireStore);
 }
