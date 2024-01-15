@@ -1,7 +1,10 @@
 import 'package:finjan/features/auth/presentation/cubit/cubit/sign_up_cubit.dart';
 import 'package:finjan/features/auth/presentation/cubit/register_cubit.dart';
+import 'package:finjan/features/home/presentation/cubit/add_card_cubit.dart';
 import 'package:finjan/features/home/presentation/cubit/get_coffe_cubit.dart';
+import 'package:finjan/features/layout/screens/cubit/layout_cubit_cubit.dart';
 import 'package:finjan/features/layout/screens/layout_screen.dart';
+import 'package:finjan/features/orders/cubit/get_cards_cubit.dart';
 import 'package:finjan/features/splash/screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,11 +18,14 @@ static const  MyApp _instance =  MyApp._internal();
   Widget build(BuildContext context) {
     return   MultiBlocProvider(providers: [
       BlocProvider(create: (context)=>di.sl<RegisterCubit>()),
+      BlocProvider(create: (context)=>di.sl<LayoutCubitCubit>()),
       BlocProvider(create: (context)=>di.sl<SignUpCubit>()),
-      BlocProvider(create: (context)=>di.sl<GetCoffeCubit>()..getHotCoffe())
-    ], child:   MaterialApp(
+      BlocProvider(create: (context)=>di.sl<GetCoffeCubit>()..getHotCoffe(),),
+      BlocProvider(create: (context)=>di.sl<AddCardCubit>()),
+      BlocProvider(create: (context)=>di.sl<GetCardsCubit>())
+    ], child:   const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:LayoutScreen()  ,
+      home:SplashScreen()  ,
     ));
   }
 }

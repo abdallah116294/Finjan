@@ -7,26 +7,27 @@ class HomeSmallProductCard extends StatelessWidget {
       required this.name,
       required this.grind_option,
       required this.price,
-      });
+      required this.onPresed});
   final String newtworkImage;
   final String name;
   final String grind_option;
   final int price;
+  final VoidCallback onPresed;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
           width: 143,
-          height: 165,
+          height: 144,
           clipBehavior: Clip.antiAlias,
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: const BorderSide(width: 1, color: Colors.white),
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(12),
             ),
-            shadows: [
-              const BoxShadow(
+            shadows: const [
+              BoxShadow(
                 color: Color(0x3F000000),
                 blurRadius: 7,
                 offset: Offset(2, 1),
@@ -39,7 +40,7 @@ class HomeSmallProductCard extends StatelessWidget {
               Positioned(
                 left: 7,
                 top: 7,
-                child: Container(
+                child: SizedBox(
                   width: 129,
                   height: 99,
                   child: Stack(
@@ -87,14 +88,15 @@ class HomeSmallProductCard extends StatelessWidget {
                                 ),
                               ),
                               const Positioned(
-                                left: 17,
-                                top: 2,
+                                left: 10,
+                                top: 8,
+                                //top: ,
                                 child: Text(
                                   '4.9',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 8,
+                                    fontSize: 12,
                                     fontFamily: 'Lato',
                                     fontWeight: FontWeight.w300,
                                     height: 0.19,
@@ -117,33 +119,33 @@ class HomeSmallProductCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 12,
                     fontFamily: 'Lato',
                     fontWeight: FontWeight.w400,
                     height: 0.09,
                   ),
                 ),
               ),
+              // Positioned(
+              //   left: 7,
+              //   top: 127,
+              //   child: Text(
+              //     grind_option,
+              //     textAlign: TextAlign.center,
+              //     style: const TextStyle(
+              //       color: Colors.black,
+              //       fontSize: 6,
+              //       fontFamily: 'Lato',
+              //       fontWeight: FontWeight.w400,
+              //       height: 0.33,
+              //     ),
+              //   ),
+              // ),
               Positioned(
-                left: 7,
-                top: 127,
-                child: Text(
-                  grind_option,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 6,
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.w400,
-                    height: 0.33,
-                  ),
-                ),
-              ),
-               Positioned(
                 left: 8,
-                top: 139,
+                top: 130,
                 child: Text(
-                  '${price}k',
+                  '${price}\$',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.black,
@@ -156,13 +158,22 @@ class HomeSmallProductCard extends StatelessWidget {
               ),
               Positioned(
                 left: 106,
-                top: 125,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: const ShapeDecoration(
-                    color: Color(0xFF835F45),
-                    shape: OvalBorder(),
+                top: 108,
+                child: InkWell(
+                  onTap: () {
+                    onPresed();
+                  },
+                  child: Container(
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    width: 30,
+                    height: 30,
+                    decoration: const ShapeDecoration(
+                      color: Color(0xFF835F45),
+                      shape: OvalBorder(),
+                    ),
                   ),
                 ),
               ),

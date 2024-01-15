@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:finjan/core/error/failure.dart';
 import 'package:finjan/features/home/data/remote_data/remote_data.dart';
-import 'package:finjan/features/home/domain/entity/coffe_entity.dart';
 import 'package:finjan/features/home/domain/repository/get_coffe_Repository.dart';
 import 'package:finjan/features/test_model.dart';
 

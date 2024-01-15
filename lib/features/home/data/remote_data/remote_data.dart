@@ -1,12 +1,9 @@
-import 'dart:convert';
 
 import 'package:finjan/core/api/api_consumer.dart';
 import 'package:finjan/core/api/api_endpoints.dart';
 import 'package:finjan/core/api/api_get.dart';
-import 'package:finjan/features/home/data/model/coffe_model.dart';
 import 'package:finjan/features/test_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 abstract class RemoteData {
   Future<List<CoffeeTestModel>> getCoffe();

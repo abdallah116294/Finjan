@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finjan/features/auth/data/data/firebase_data_source/firebase_data_source.dart';
 import 'package:finjan/features/auth/data/model/user_model.dart';
 import 'package:finjan/features/auth/domain/entities/user_entity.dart';
+import 'package:finjan/features/home/data/model/card_model.dart';
+import 'package:finjan/features/home/domain/entity/card_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
@@ -37,12 +39,42 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
               email: user.email,
               uid: uid,
               status: user.status,
-              password: user.password)
+              password: user.password,
+              phonenumber: user.phonenumber)
           .toDocument();
       if (!value.exists) {
         userCollectionRef.doc(uid).set(newUser);
       }
       return;
+    });
+  }
+
+  @override
+  Future<void> addCard(CardEntity cardEntity) async {
+    final cardCollectionRef =
+        firestore.collection("users").doc(cardEntity.uid).collection('cards');
+    final cardId = cardCollectionRef.doc().id;
+    cardCollectionRef.doc(cardId).get().then((value) {
+      final newCard = CardModel(
+              cardId: cardId,
+              uid: cardEntity.uid,
+              cardImage: cardEntity.cardImage,
+              cardName: cardEntity.cardName,
+              cardPrice: cardEntity.cardPrice)
+          .toDocumnet();
+      if (!value.exists) {
+        cardCollectionRef.doc(cardId).set(newCard);
+      }
+      return;
+    });
+  }
+
+  @override
+  Stream<List<CardEntity>> getCards(String uid) {
+    final cardCollectionRef =
+        firestore.collection('users').doc(uid).collection('cards');
+    return cardCollectionRef.snapshots().map((event) {
+      return event.docs.map((e) => CardModel.fromSnapShot(e)).toList();
     });
   }
 }

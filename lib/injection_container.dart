@@ -11,8 +11,12 @@ import 'package:finjan/features/auth/data/repository/fireabse_repo_imp.dart';
 import 'package:finjan/features/auth/data/repository/register_repo_impl.dart';
 import 'package:finjan/features/auth/domain/repository/firebase_repository.dart';
 import 'package:finjan/features/auth/domain/repository/register_repo.dart';
+import 'package:finjan/features/auth/domain/usecase/add_new_card_usecase.dart';
+import 'package:finjan/features/auth/domain/usecase/get_cards.dart';
 import 'package:finjan/features/auth/domain/usecase/get_create_curren_usecase.dart';
+import 'package:finjan/features/auth/domain/usecase/get_user_current_uuid.dart';
 import 'package:finjan/features/auth/domain/usecase/register_usecase.dart';
+import 'package:finjan/features/auth/domain/usecase/sign_in_usecase.dart';
 import 'package:finjan/features/auth/domain/usecase/sign_up_usecase.dart';
 import 'package:finjan/features/auth/presentation/cubit/cubit/sign_up_cubit.dart';
 import 'package:finjan/features/auth/presentation/cubit/register_cubit.dart';
@@ -20,7 +24,10 @@ import 'package:finjan/features/home/data/remote_data/remote_data.dart';
 import 'package:finjan/features/home/data/repository/get_coffe_repo_impl.dart';
 import 'package:finjan/features/home/domain/repository/get_coffe_Repository.dart';
 import 'package:finjan/features/home/domain/usecase/get_coffe_usecase.dart';
+import 'package:finjan/features/home/presentation/cubit/add_card_cubit.dart';
 import 'package:finjan/features/home/presentation/cubit/get_coffe_cubit.dart';
+import 'package:finjan/features/layout/screens/cubit/layout_cubit_cubit.dart';
+import 'package:finjan/features/orders/cubit/get_cards_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
@@ -28,9 +35,18 @@ final sl = GetIt.instance;
 Future<void> init() async {
   //bloc
   sl.registerFactory<RegisterCubit>(() => RegisterCubit(registerUseCase: sl()));
-  sl.registerFactory<SignUpCubit>(() =>
-      SignUpCubit(signUPUsecase: sl(), getCreateCurrentUserUsecase: sl()));
-  sl.registerFactory<GetCoffeCubit>(() => GetCoffeCubit(usecase: sl()));
+  sl.registerFactory<SignUpCubit>(() => SignUpCubit(
+      signUPUsecase: sl(),
+      getCreateCurrentUserUsecase: sl(),
+      signInUsecase: sl(),
+      getUserCurrentUidUsecase: sl()));
+  sl.registerFactory<GetCoffeCubit>(
+      () => GetCoffeCubit(usecase: sl(), getUserCurrentUidUsecase: sl()));
+  sl.registerFactory<AddCardCubit>(() =>
+      AddCardCubit(addNewCardUseCase: sl(), getUserCurrentUidUsecase: sl()));
+  sl.registerFactory<LayoutCubitCubit>(
+      () => LayoutCubitCubit(getUserCurrentUidUsecase: sl()));
+  sl.registerFactory<GetCardsCubit>(() => GetCardsCubit(getCardsUsecase: sl(),getUserCurrentUidUsecase: sl()));
   //usecase
   sl.registerLazySingleton<RegisterUseCase>(
       () => RegisterUseCase(registerRepository: sl()));
@@ -40,6 +56,14 @@ Future<void> init() async {
       () => SignUPUsecase(repository: sl()));
   sl.registerLazySingleton<GetCreateCurrentUserUsecase>(
       () => GetCreateCurrentUserUsecase(repository: sl()));
+  sl.registerLazySingleton<SignInUsecase>(
+      () => SignInUsecase(repository: sl()));
+  sl.registerLazySingleton<AddNewCardUseCase>(
+      () => AddNewCardUseCase(repository: sl()));
+  sl.registerLazySingleton<GetUserCurrentUidUsecase>(
+      () => GetUserCurrentUidUsecase(repository: sl()));
+  sl.registerLazySingleton<GetCardsUsecase>(
+      () => GetCardsUsecase(repository: sl()));
   //repository
   sl.registerLazySingleton<RegisterRepository>(
       () => RegisterRepositoryImpl(remoteDataSource: sl()));
@@ -53,7 +77,8 @@ Future<void> init() async {
   //remote data source
   sl.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(apiConsumer: sl()));
-  sl.registerLazySingleton<RemoteData>(() => RemoteDataImpl(apiConsumer: sl(),dioHelper: sl()));
+  sl.registerLazySingleton<RemoteData>(
+      () => RemoteDataImpl(apiConsumer: sl(), dioHelper: sl()));
   //Api
   // sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton(() => DioHelper(sl()));

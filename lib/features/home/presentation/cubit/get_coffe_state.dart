@@ -13,7 +13,8 @@ final class GetHotCoffeIsloading extends GetCoffeState {}
 
 final class GetHotCoffeLoaded extends GetCoffeState {
   List<CoffeeTestModel>? hotCoffe;
-  GetHotCoffeLoaded({required this.hotCoffe});
+  String uuid;
+  GetHotCoffeLoaded({required this.hotCoffe,required this.uuid});
 }
 
 final class GetHotCoffeError extends GetCoffeState {

@@ -2,7 +2,7 @@
 import 'package:finjan/core/utils/appcolor.dart';
 import 'package:flutter/material.dart';
 class CustomTextFormFiled extends StatelessWidget {
-  CustomTextFormFiled(
+  const CustomTextFormFiled(
       {Key? key,
       this.isObscureText,
       this.inputFiled,

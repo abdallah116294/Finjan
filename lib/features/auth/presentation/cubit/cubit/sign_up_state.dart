@@ -11,9 +11,12 @@ final class SignUpInitial extends SignUpState {}
 
 final class UserLoading extends SignUpState {}
 
-final class UserSucess extends SignUpState {}
+final class UserSucess extends SignUpState {
+  final String uid;
+ const UserSucess({required this.uid});
+}
 
 final class UserFailure extends SignUpState {
   final String error;
- const  UserFailure({required this.error});
+  const UserFailure({required this.error});
 }

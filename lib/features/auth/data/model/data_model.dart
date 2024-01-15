@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:finjan/features/auth/domain/entities/data_register_data.dart';
 
