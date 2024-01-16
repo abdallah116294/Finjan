@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:finjan/core/api/api_endpoints.dart';
 import 'package:flutter/material.dart';
@@ -6,16 +8,17 @@ import 'package:flutter/material.dart';
 class DioHelper {
   final Dio _dio;
   DioHelper(this._dio);
-  Future<Map<String, dynamic>> getProductsData() async {
+  Future<Map<String, dynamic>> get({required String endpoint}) async {
     try {
       var response = await _dio.get(
-        APIEndPoints.coffeUrl + APIEndPoints.getCoffeUrl,
+        APIEndPoints.coffeBasUrl + endpoint,
       );
       debugPrint(response.data.toString());
       if (response.statusCode == 200) {
         //Map<String, dynamic> responseData = json.decode(response.data);
+        Map<String, dynamic> responseData = json.decode(response.data);
         debugPrint(response.data.toString());
-        return response.data;
+        return responseData;
       } else {
         debugPrint('Error ${response.statusCode}');
         throw Exception("Error Exception ${response.statusCode}");

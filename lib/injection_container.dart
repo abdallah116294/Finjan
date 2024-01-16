@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:finjan/core/api/api_consumer.dart';
 import 'package:finjan/core/api/api_get.dart';
 import 'package:finjan/core/api/api_interceptors.dart';
+import 'package:finjan/core/api/category_consumer.dart';
+import 'package:finjan/core/api/dio_category_consumer.dart';
 import 'package:finjan/core/api/dio_consumer.dart';
 import 'package:finjan/features/auth/data/data/firebase_data_source/firebase_data_source.dart';
 import 'package:finjan/features/auth/data/data/firebase_data_source/firebase_data_source_impl.dart';
@@ -24,7 +26,10 @@ import 'package:finjan/features/home/data/remote_data/remote_data.dart';
 import 'package:finjan/features/home/data/repository/get_coffe_repo_impl.dart';
 import 'package:finjan/features/home/domain/repository/get_coffe_Repository.dart';
 import 'package:finjan/features/home/domain/usecase/get_coffe_usecase.dart';
+import 'package:finjan/features/home/domain/usecase/hot_coffe_category_usecase.dart';
+import 'package:finjan/features/home/domain/usecase/iced_coffe_category_usecase.dart';
 import 'package:finjan/features/home/presentation/cubit/add_card_cubit.dart';
+import 'package:finjan/features/home/presentation/cubit/cubit/coffee_category_cubit.dart';
 import 'package:finjan/features/home/presentation/cubit/get_coffe_cubit.dart';
 import 'package:finjan/features/layout/screens/cubit/layout_cubit_cubit.dart';
 import 'package:finjan/features/orders/cubit/get_cards_cubit.dart';
@@ -46,7 +51,10 @@ Future<void> init() async {
       AddCardCubit(addNewCardUseCase: sl(), getUserCurrentUidUsecase: sl()));
   sl.registerFactory<LayoutCubitCubit>(
       () => LayoutCubitCubit(getUserCurrentUidUsecase: sl()));
-  sl.registerFactory<GetCardsCubit>(() => GetCardsCubit(getCardsUsecase: sl(),getUserCurrentUidUsecase: sl()));
+  sl.registerFactory<GetCardsCubit>(() =>
+      GetCardsCubit(getCardsUsecase: sl(), getUserCurrentUidUsecase: sl()));
+  sl.registerFactory<CoffeeCategoryCubit>(() => CoffeeCategoryCubit(
+      hotCoffeCategoryUsecase: sl(), icedCoffeCategoryUsecase: sl()));
   //usecase
   sl.registerLazySingleton<RegisterUseCase>(
       () => RegisterUseCase(registerRepository: sl()));
@@ -64,6 +72,10 @@ Future<void> init() async {
       () => GetUserCurrentUidUsecase(repository: sl()));
   sl.registerLazySingleton<GetCardsUsecase>(
       () => GetCardsUsecase(repository: sl()));
+  sl.registerLazySingleton<HotCoffeCategoryUsecase>(
+      () => HotCoffeCategoryUsecase(getCoffeRepository: sl()));
+  sl.registerLazySingleton<IcedCoffeCategoryUsecase>(
+      () => IcedCoffeCategoryUsecase(getCoffeRepository: sl()));
   //repository
   sl.registerLazySingleton<RegisterRepository>(
       () => RegisterRepositoryImpl(remoteDataSource: sl()));
@@ -77,13 +89,18 @@ Future<void> init() async {
   //remote data source
   sl.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(apiConsumer: sl()));
-  sl.registerLazySingleton<RemoteData>(
-      () => RemoteDataImpl(apiConsumer: sl(), dioHelper: sl()));
+  sl.registerLazySingleton<RemoteData>(() => RemoteDataImpl(
+        apiConsumer: sl(),
+        dioHelper: sl(),
+        categoryConSumer: sl(),
+      ));
   //Api
   // sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton(() => DioHelper(sl()));
   sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));
+  //sl.registerLazySingleton<ApiConsumer>(() => DioConsumer2(client: sl()));
+  sl.registerLazySingleton<CategoryConSumer>(() => CategortDiocConsumer(client: sl()));
   sl.registerLazySingleton(() => AppInterceptors());
   sl.registerLazySingleton(() => LogInterceptor(
       request: true,

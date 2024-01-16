@@ -4,16 +4,17 @@ import 'package:dio/dio.dart';
 import 'package:finjan/core/api/api_consumer.dart';
 import 'package:finjan/core/api/api_endpoints.dart';
 import 'package:finjan/core/api/api_interceptors.dart';
+import 'package:finjan/core/api/category_consumer.dart';
 import 'package:finjan/core/api/status_code.dart';
 import 'package:finjan/core/error/exception.dart';
 import 'package:finjan/injection_container.dart' as di;
 import 'package:flutter/foundation.dart';
 
-class DioConsumer implements ApiConsumer {
+class CategortDiocConsumer implements CategoryConSumer {
   final Dio client;
-  DioConsumer({required this.client}) {
+  CategortDiocConsumer({required this.client}) {
     client.options
-      ..baseUrl = APIEndPoints.coffeUrl
+      ..baseUrl = APIEndPoints.coffeBasUrl
       ..responseType = ResponseType.plain
       ..validateStatus = (status) {
         return status! < StatusCode.internalServerError;
@@ -27,18 +28,6 @@ class DioConsumer implements ApiConsumer {
   Future get(String pathe, {Map<String, dynamic>? queryParametes}) async {
     try {
       final response = await client.get(pathe, queryParameters: queryParametes);
-      return _handleResponseAsJson(response);
-    } on DioException catch (error) {
-      _handleDioError(error);
-    }
-  }
-
-  @override
-  Future post(String path,
-      {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters}) async {
-    try {
-      final response = await client.post(path, data: body);
       return _handleResponseAsJson(response);
     } on DioException catch (error) {
       _handleDioError(error);

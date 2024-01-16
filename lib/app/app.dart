@@ -1,7 +1,10 @@
 import 'package:finjan/features/auth/presentation/cubit/cubit/sign_up_cubit.dart';
 import 'package:finjan/features/auth/presentation/cubit/register_cubit.dart';
 import 'package:finjan/features/home/presentation/cubit/add_card_cubit.dart';
+import 'package:finjan/features/home/presentation/cubit/cubit/coffee_category_cubit.dart';
 import 'package:finjan/features/home/presentation/cubit/get_coffe_cubit.dart';
+import 'package:finjan/features/home/presentation/screens/hot_category_screen.dart';
+import 'package:finjan/features/home/presentation/screens/iced_category_screen.dart';
 import 'package:finjan/features/layout/screens/cubit/layout_cubit_cubit.dart';
 import 'package:finjan/features/layout/screens/layout_screen.dart';
 import 'package:finjan/features/orders/cubit/get_cards_cubit.dart';
@@ -22,7 +25,8 @@ static const  MyApp _instance =  MyApp._internal();
       BlocProvider(create: (context)=>di.sl<SignUpCubit>()),
       BlocProvider(create: (context)=>di.sl<GetCoffeCubit>()..getHotCoffe(),),
       BlocProvider(create: (context)=>di.sl<AddCardCubit>()),
-      BlocProvider(create: (context)=>di.sl<GetCardsCubit>())
+      BlocProvider(create: (context)=>di.sl<GetCardsCubit>()),
+      BlocProvider(create: (context)=>di.sl<CoffeeCategoryCubit>()..getHotCoffee()..getIcdedCoffee())
     ], child:   const MaterialApp(
       debugShowCheckedModeBanner: false,
       home:SplashScreen()  ,
