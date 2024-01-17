@@ -11,7 +11,8 @@ import 'package:flutter/foundation.dart';
 
 class DioConsumer implements ApiConsumer {
   final Dio client;
-  DioConsumer({required this.client}) {
+ 
+  DioConsumer({required this.client,}) {
     client.options
       ..baseUrl = APIEndPoints.coffeUrl
       ..responseType = ResponseType.plain

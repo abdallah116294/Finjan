@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:finjan/core/api/api_consumer.dart';
+import 'package:finjan/core/api/api_endpoints.dart';
 import 'package:finjan/core/api/api_get.dart';
 import 'package:finjan/core/api/api_interceptors.dart';
 import 'package:finjan/core/api/category_consumer.dart';
-import 'package:finjan/core/api/dio_category_consumer.dart';
 import 'package:finjan/core/api/dio_consumer.dart';
+import 'package:finjan/core/api/web_server.dart';
 import 'package:finjan/features/auth/data/data/firebase_data_source/firebase_data_source.dart';
 import 'package:finjan/features/auth/data/data/firebase_data_source/firebase_data_source_impl.dart';
 import 'package:finjan/features/auth/data/data/remote_data.dart';
@@ -35,6 +36,7 @@ import 'package:finjan/features/layout/screens/cubit/layout_cubit_cubit.dart';
 import 'package:finjan/features/orders/cubit/get_cards_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -89,18 +91,17 @@ Future<void> init() async {
   //remote data source
   sl.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(apiConsumer: sl()));
-  sl.registerLazySingleton<RemoteData>(() => RemoteDataImpl(
-        apiConsumer: sl(),
-        dioHelper: sl(),
-        categoryConSumer: sl(),
-      ));
+  sl.registerLazySingleton<RemoteData>(() =>
+      RemoteDataImpl(apiConsumer: sl(), dioHelper: sl(), apiService: sl()));
   //Api
   // sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton(() => DioHelper(sl()));
   sl.registerLazySingleton(() => Dio());
-  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));
-  //sl.registerLazySingleton<ApiConsumer>(() => DioConsumer2(client: sl()));
-  sl.registerLazySingleton<CategoryConSumer>(() => CategortDiocConsumer(client: sl()));
+  sl.registerLazySingleton<http.Client>(() => http.Client());
+  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(
+        client: sl(),
+      ));
+  sl.registerLazySingleton(() => ApiService(APIEndPoints.coffeBasUrl));
   sl.registerLazySingleton(() => AppInterceptors());
   sl.registerLazySingleton(() => LogInterceptor(
       request: true,

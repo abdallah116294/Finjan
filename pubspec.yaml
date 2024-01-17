@@ -44,6 +44,7 @@ dependencies:
   flutter_native_splash: 2.3.7
   get: ^4.6.6
   get_it: ^7.6.4
+  http: 1.1.0
   lottie: ^2.7.0
 
 dev_dependencies:

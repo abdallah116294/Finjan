@@ -13,7 +13,11 @@ class CoffeCategory {
     description = json['description'];
     ingredients = json['ingredients'].cast<String>();
     image = json['image'];
-    id = json['id'];
+    try {
+      id = json['id'] is String ? int.parse(json['id']) : json['id'];
+    } catch (e) {
+      id = 0;
+    }
   }
 
   Map<String, dynamic> toJson() {

@@ -26,7 +26,8 @@ static const  MyApp _instance =  MyApp._internal();
       BlocProvider(create: (context)=>di.sl<GetCoffeCubit>()..getHotCoffe(),),
       BlocProvider(create: (context)=>di.sl<AddCardCubit>()),
       BlocProvider(create: (context)=>di.sl<GetCardsCubit>()),
-      BlocProvider(create: (context)=>di.sl<CoffeeCategoryCubit>()..getHotCoffee()..getIcdedCoffee())
+      BlocProvider(create: (context)=>di.sl<CoffeeCategoryCubit>()..getHotCoffee()..getIcdedCoffee(),
+      )
     ], child:   const MaterialApp(
       debugShowCheckedModeBanner: false,
       home:SplashScreen()  ,

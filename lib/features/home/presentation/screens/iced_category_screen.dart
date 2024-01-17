@@ -1,5 +1,6 @@
 import 'package:finjan/core/utils/appcolor.dart';
 import 'package:finjan/features/home/presentation/cubit/cubit/coffee_category_cubit.dart';
+import 'package:finjan/features/home/presentation/screens/detail_screen.dart';
 import 'package:finjan/features/home/presentation/widgets/coffe_category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,7 @@ class IcedCategoryScreen extends StatelessWidget {
 
                   backgroundColor: AppColor.backgroundColor,
                   centerTitle: true,
-                  title:const  Text("Hot Coffe "),
+                  title:const  Text("Iced Coffe "),
                 ),
       body: Column(
         children: [
@@ -63,7 +64,14 @@ class IcedCategoryScreen extends StatelessWidget {
                       // mainAxisSpacing: 2,
                     ),
                     itemBuilder: (context, index) {
-                      return   CategoryCoffeWidget(imageUrl: state.coffeCategory[index].image.toString(), name: state.coffeCategory[index].title.toString(),);
+                      return   InkWell(onTap: (){
+                         Navigator.push(context,
+                                      MaterialPageRoute(builder: (context)=>DetailScreen(coffeeName:state.coffeCategory[index].title
+                                      .toString() , imageUrl: state.coffeCategory[index].image
+                                      .toString(), coffePrice: 22, kind: state.coffeCategory[index].ingredients!.first
+                                      .toString(), description: state.coffeCategory[index].description
+                                      .toString(), uid: '')));
+                      },child: CategoryCoffeWidget(imageUrl: state.coffeCategory[index].image.toString(), name: state.coffeCategory[index].title.toString(),));
                     }),
               )
             ]),
