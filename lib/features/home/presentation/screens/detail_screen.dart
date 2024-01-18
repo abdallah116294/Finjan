@@ -87,7 +87,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     width: double.infinity,
                     errorWidget: Container(),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 10.h,
                   ),
                   Padding(
@@ -151,6 +151,12 @@ class _DetailScreenState extends State<DetailScreen> {
                               debugPrint(slecetedSize);
                               setState(() {
                                 isClickedS = !isClickedS;
+                                if (isClickedL == true) {
+                                 
+                                   isClickedL = !isClickedL;
+                                }else if(isClickedM==true){
+                                   isClickedM = !isClickedM;
+                                }
                               });
                             },
                             child: ChooseSizeWidget(
@@ -165,6 +171,12 @@ class _DetailScreenState extends State<DetailScreen> {
                               debugPrint(slecetedSize);
                               setState(() {
                                 isClickedM = !isClickedM;
+                                    if (isClickedL == true) {
+                                 
+                                   isClickedL = !isClickedL;
+                                }else if(isClickedS==true){
+                                   isClickedS = !isClickedS;
+                                }
                               });
                             },
                             child: ChooseSizeWidget(
@@ -179,6 +191,12 @@ class _DetailScreenState extends State<DetailScreen> {
                               debugPrint(slecetedSize);
                               setState(() {
                                 isClickedL = !isClickedL;
+                                    if (isClickedM == true) {
+                                 
+                                   isClickedM = !isClickedM;
+                                }else if(isClickedS==true){
+                                   isClickedS = !isClickedS;
+                                }
                               });
                             },
                             child: ChooseSizeWidget(
@@ -189,7 +207,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           )
                         ]),
                   ),
-               
+
                   SizedBox(
                     width: 190.w,
                     child: Center(
@@ -214,7 +232,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   const SnackBar(content: Text('Done')));
                             });
                           },
-                          child:  Text("ADD",
+                          child: Text("ADD",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20.sp,

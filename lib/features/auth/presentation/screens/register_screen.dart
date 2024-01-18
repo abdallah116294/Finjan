@@ -26,9 +26,12 @@ class RegisterScreen extends StatelessWidget {
           if (state is UserLoading) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(const SnackBar(content: Text("Loading")));
-          } else if (state is UserSucess) {
+          } else if (state is UserRegisterSucces) {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) =>  LayoutScreen(uid: state.uid.toString(), name: state.userEntity.name.toString(),)));
+                MaterialPageRoute(builder: (context) =>  LoginScreen(email: _emailController.text, password: _passwordController.text,)));
+          }else if (state  is UserFailure ){
+              ScaffoldMessenger.of(context)
+                .showSnackBar( SnackBar(content: Text(state.error.toString())));
           }
         },
         builder: (context, state) {
@@ -177,7 +180,7 @@ class RegisterScreen extends StatelessWidget {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    LoginScreen()));
+                                                    LoginScreen(email: '', password: '',)));
                                       },
                                       child:  Text('SignIn',style: TextStyle(fontSize: 24.sp),))
                                 ],

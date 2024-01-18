@@ -14,7 +14,12 @@ final class UserLoading extends SignUpState {}
 final class UserSucess extends SignUpState {
   final String uid;
   final UserEntity userEntity;
-  const UserSucess({required this.uid,required this.userEntity});
+  const UserSucess({required this.uid, required this.userEntity});
+}
+
+final class UserRegisterSucces extends SignUpState {
+  final String uid;
+  const UserRegisterSucces({required this.uid});
 }
 
 final class UserFailure extends SignUpState {

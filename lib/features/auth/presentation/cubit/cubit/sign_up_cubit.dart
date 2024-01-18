@@ -42,9 +42,13 @@ class SignUpCubit extends Cubit<SignUpState> {
     try {
       await signUPUsecase.call(userEntity);
       await getCreateCurrentUserUsecase.call(userEntity);
+      // var user;
       final uuid = await getUserCurrentUidUsecase.call();
-      final user = await getSpecificUserByIdUsecase.call(uuid);
-      emit(UserSucess(uid: uuid, userEntity: user!));
+      // Future.delayed(const Duration(seconds: 5), () async {
+      //    user = await getSpecificUserByIdUsecase.call(uuid);
+      // });
+      emit(UserRegisterSucces(uid: uuid));
+      // emit(UserSucess(uid: uuid, userEntity: user!));
     } on SocketException catch (error) {
       emit(UserFailure(error: error.toString()));
     } catch (error) {

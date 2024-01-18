@@ -9,11 +9,28 @@ import 'package:finjan/injection_container.dart' as di;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+class LoginScreen extends StatefulWidget {
+  LoginScreen({super.key, required this.email, required this.password});
+  final String email;
+  final String password;
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _emailController = TextEditingController();
+
+  TextEditingController _passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _emailController.text = widget.email;
+    _passwordController.text = widget.password;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -24,10 +41,14 @@ class LoginScreen extends StatelessWidget {
             ScaffoldMessenger.of(context)
                 .showSnackBar(const SnackBar(content: Text("Welcom To you")));
           } else if (state is UserSucess) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LayoutScreen(uid: state.uid, name: state.userEntity.name.toString(),)));
-          }else if(state is UserFailure){
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => LayoutScreen(
+                      uid: state.uid,
+                      name: state.userEntity.name.toString(),
+                    )));
+          } else if (state is UserFailure) {
             ScaffoldMessenger.of(context)
-                .showSnackBar( SnackBar(content: Text(state.error.toString())));
+                .showSnackBar(SnackBar(content: Text(state.error.toString())));
           }
         },
         builder: (context, state) {
@@ -38,11 +59,11 @@ class LoginScreen extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                  padding:  EdgeInsets.all(8.0.w),
+                  padding: EdgeInsets.all(8.0.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Center(
+                      Center(
                         child: DefaultTextStyle(
                             style: TextStyle(
                                 color: AppColor.backgroundColor,
@@ -50,14 +71,14 @@ class LoginScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                             child: const Text('Finjan|فنجان')),
                       ),
-                       Text(
+                      Text(
                         "SignIn",
                         style: TextStyle(
                             color: AppColor.backgroundColor,
                             fontSize: 32.sp,
                             fontWeight: FontWeight.bold),
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 20.h,
                       ),
                       Form(
@@ -79,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                                   return null;
                                 },
                               ),
-                               SizedBox(
+                              SizedBox(
                                 height: 15.h,
                               ),
                               CustomTextFormFiled(
@@ -99,8 +120,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white
-                                ),
+                                    backgroundColor: Colors.white),
                                 // backgroundColor: Colors.white,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
@@ -112,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                                                     _passwordController.text));
                                   }
                                 },
-                                child:  Icon(
+                                child: Icon(
                                   Icons.arrow_right_alt,
                                   size: 32.w,
                                   color: AppColor.backgroundColor,
