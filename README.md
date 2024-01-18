@@ -1,4 +1,3 @@
-```markdown
 # Finjan - Flutter Coffee Shop App
 
 Finjan (فنجان) is a Flutter mobile application that allows users to explore and purchase a variety of coffee drinks and beans. The app follows the principles of Clean Architecture, integrates Firebase services for Firestore and Authentication, and uses Dio for making API calls.
@@ -15,7 +14,7 @@ Finjan (فنجان) is a Flutter mobile application that allows users to explore
 ## Screenshots
 
 ![Screenshot 1](assets/finjan1.jpeg)
-![Screenshot 2](screenshots/screenshot_2.png)
+![Screenshot 2](assets/finjan2.jpeg)
 <!-- Add more screenshots as needed -->
 
 ## Getting Started
@@ -72,4 +71,3 @@ Contributions are welcome! Feel free to open issues and pull requests.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
