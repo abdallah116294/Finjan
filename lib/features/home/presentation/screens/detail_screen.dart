@@ -7,6 +7,7 @@ import 'package:finjan/features/home/presentation/widgets/titles_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:finjan/injection_container.dart' as di;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailScreen extends StatefulWidget {
   DetailScreen(
@@ -86,8 +87,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     width: double.infinity,
                     errorWidget: Container(),
                   ),
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: 10.h,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -190,7 +191,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                
                   SizedBox(
-                    width: 190,
+                    width: 190.w,
                     child: Center(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -213,10 +214,10 @@ class _DetailScreenState extends State<DetailScreen> {
                                   const SnackBar(content: Text('Done')));
                             });
                           },
-                          child: const Text("ADD",
+                          child:  Text("ADD",
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold))),
                     ),
                   )

@@ -1,5 +1,6 @@
 import 'package:finjan/features/home/presentation/widgets/subtitle_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppMethods {
  static Future<void> dailogAlert(
@@ -17,8 +18,8 @@ class AppMethods {
             content: Column(mainAxisSize: MainAxisSize.min, children: [
               Image.network(
                 imagePathe,
-                height: 60,
-                width: 60,
+                height: 60.h,
+                width: 60.w,
               ),
               const SizedBox(
                 height: 16,
@@ -31,18 +32,18 @@ class AppMethods {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(
+                      child:  Text(
                         "cancel",
-                        style: TextStyle(color: Colors.red, fontSize: 20),
+                        style: TextStyle(color: Colors.red, fontSize: 20.sp),
                       )),
-                  const SizedBox(height: 18),
+                   SizedBox(height: 18.h),
                   TextButton(
                       onPressed: () {
                         fun();
                       },
-                      child: const Text(
+                      child:  Text(
                         "Ok",
-                        style: TextStyle(color: Colors.blue, fontSize: 20),
+                        style: TextStyle(color: Colors.blue, fontSize: 20.sp),
                       )),
                 ],
               )

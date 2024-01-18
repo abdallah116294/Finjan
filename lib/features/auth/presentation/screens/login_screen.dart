@@ -6,6 +6,7 @@ import 'package:finjan/features/layout/screens/layout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:finjan/injection_container.dart' as di;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -37,27 +38,27 @@ class LoginScreen extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:  EdgeInsets.all(8.0.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Center(
+                       Center(
                         child: DefaultTextStyle(
                             style: TextStyle(
                                 color: AppColor.backgroundColor,
-                                fontSize: 32,
+                                fontSize: 32.sp,
                                 fontWeight: FontWeight.bold),
-                            child: Text('Finjan|فنجان')),
+                            child: const Text('Finjan|فنجان')),
                       ),
-                      const Text(
+                       Text(
                         "SignIn",
                         style: TextStyle(
                             color: AppColor.backgroundColor,
-                            fontSize: 32,
+                            fontSize: 32.sp,
                             fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       Form(
                           key: _formKey,
@@ -78,8 +79,8 @@ class LoginScreen extends StatelessWidget {
                                   return null;
                                 },
                               ),
-                              const SizedBox(
-                                height: 15,
+                               SizedBox(
+                                height: 15.h,
                               ),
                               CustomTextFormFiled(
                                 inputFiled: 'Password',
@@ -96,8 +97,11 @@ class LoginScreen extends StatelessWidget {
                                   return null;
                                 },
                               ),
-                              FloatingActionButton(
-                                backgroundColor: Colors.white,
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white
+                                ),
+                                // backgroundColor: Colors.white,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     BlocProvider.of<SignUpCubit>(context)
@@ -108,9 +112,9 @@ class LoginScreen extends StatelessWidget {
                                                     _passwordController.text));
                                   }
                                 },
-                                child: const Icon(
+                                child:  Icon(
                                   Icons.arrow_right_alt,
-                                  size: 32,
+                                  size: 32.w,
                                   color: AppColor.backgroundColor,
                                 ),
                               )

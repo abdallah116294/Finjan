@@ -12,6 +12,7 @@ import 'package:finjan/features/home/presentation/widgets/coffe_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:finjan/injection_container.dart' as di;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding:  EdgeInsets.all(16.0.w),
           child: SizedBox(
             height: size.height * .24,
             child: ClipRRect(
@@ -110,7 +111,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ]),
-        SizedBox(height: 10),
+        SizedBox(height: 10.h),
         BlocProvider(
           create: (context) => di.sl<GetCoffeCubit>()..getHotCoffe(),
           child: BlocBuilder<GetCoffeCubit, GetCoffeState>(

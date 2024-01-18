@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SubtitleTextWidget extends StatelessWidget {
   const SubtitleTextWidget({
     super.key,
@@ -21,7 +22,7 @@ class SubtitleTextWidget extends StatelessWidget {
     return Text(
       label,
       style: TextStyle(
-        fontSize: fontSize,
+        fontSize: fontSize.sp,
         fontWeight: fontWeight,
         color: color,
         fontStyle: fontStyle,

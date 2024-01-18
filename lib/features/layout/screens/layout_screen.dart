@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:finjan/injection_container.dart' as di;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -97,8 +98,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
             child: Column(
               children: [
                 Container(
-                    width: 128.0,
-                    height: 128.0,
+                    width: 128.0.w,
+                    height: 128.0.h,
                     margin: const EdgeInsets.only(
                       top: 24.0,
                       bottom: 64.0,
@@ -114,7 +115,11 @@ class _LayoutScreenState extends State<LayoutScreen> {
                   color: Colors.white,
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    setState(() {
+                      selectedTab = 0;
+                    });
+                  },
                   leading: const Icon(Icons.home),
                   title: const Text('Home'),
                 ),

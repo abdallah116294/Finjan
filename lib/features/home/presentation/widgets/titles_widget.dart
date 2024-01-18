@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TitlesTextWidget extends StatelessWidget {
   const TitlesTextWidget({
@@ -21,7 +22,7 @@ class TitlesTextWidget extends StatelessWidget {
       // textAlign: TextAlign.justify,
       style: TextStyle(
           color: color,
-          fontSize: fontSize,
+          fontSize: fontSize.sp,
           fontWeight: FontWeight.bold,
           overflow: TextOverflow.ellipsis),
     );
