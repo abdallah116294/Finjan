@@ -79,7 +79,7 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
   }
 
   @override
-  Future<void> deleteCard(CardEntity cardEntity,String uid) async {
+  Future<void> deleteCard(CardEntity cardEntity, String uid) async {
     final carddCollectionRef =
         firestore.collection('users').doc(uid).collection("cards");
     carddCollectionRef.doc(cardEntity.cardId).get().then((value) {
@@ -88,5 +88,22 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
       }
       return;
     });
+  }
+
+  @override
+  Future<UserEntity?> getSpecificUserById(String uid) async {
+    try {
+      final userCollectionRe = firestore.collection("users");
+      DocumentSnapshot userDoc = await userCollectionRe.doc(uid).get();
+      if (userDoc.exists) {
+        return UserModel.fromJson(userDoc.data() as Map<String, dynamic>);
+        // return UserEntity
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
+    return null;
   }
 }

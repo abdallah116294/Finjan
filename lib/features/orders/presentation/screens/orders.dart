@@ -75,10 +75,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
           );
         }
         return const Center(
-          child: Text(
-            'Order Screem',
-            style: TextStyle(color: AppColor.backgroundColor),
-          ),
+          child: CircularProgressIndicator(),
         );
       }),
     );

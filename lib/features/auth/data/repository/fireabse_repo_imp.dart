@@ -34,6 +34,10 @@ class FirebaseRepositoryImp implements FirebaseRepository {
       remoteDataSource.getCards(uid);
 
   @override
-  Future<void> deleteCard(CardEntity cardEntity,String uid) async =>
-      remoteDataSource.deleteCard(cardEntity,uid);
+  Future<void> deleteCard(CardEntity cardEntity, String uid) async =>
+      remoteDataSource.deleteCard(cardEntity, uid);
+
+  @override
+  Future<UserEntity?> getSpecificUserById(String uid) async =>
+      remoteDataSource.getSpecificUserById(uid);
 }

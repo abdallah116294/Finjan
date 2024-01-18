@@ -11,20 +11,29 @@ class UserModel extends UserEntity {
       required super.password});
   factory UserModel.fromSnapshot(DocumentSnapshot documentSnapshot) {
     return UserModel(
-       phonenumber:documentSnapshot.get('phone'),
+        phonenumber: documentSnapshot.get('phone'),
         name: documentSnapshot.get('name'),
         email: documentSnapshot.get('email'),
         uid: documentSnapshot.get('uid'),
         status: documentSnapshot.get('status'),
         password: documentSnapshot.get('password'));
   }
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+        name: json['name'],
+        email: json['email'],
+        phonenumber: json['phonenumber'],
+        uid: json['uid'],
+        status: json['status'],
+        password: json['password']);
+  }
   Map<String, dynamic> toDocument() {
     return {
-      "status":status,
-      "uid":uid,
-      "email":email,
-      "name":name,
-      "phone":phonenumber
+      "status": status,
+      "uid": uid,
+      "email": email,
+      "name": name,
+      "phone": phonenumber
     };
   }
 }

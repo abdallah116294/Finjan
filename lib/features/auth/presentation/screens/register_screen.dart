@@ -27,7 +27,7 @@ class RegisterScreen extends StatelessWidget {
                 .showSnackBar(const SnackBar(content: Text("Loading")));
           } else if (state is UserSucess) {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) =>  LayoutScreen(uid: state.uid.toString(),)));
+                MaterialPageRoute(builder: (context) =>  LayoutScreen(uid: state.uid.toString(), name: state.userEntity.name.toString(),)));
           }
         },
         builder: (context, state) {

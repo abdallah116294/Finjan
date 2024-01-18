@@ -9,6 +9,7 @@ abstract class FirebaseRemoteDataSource {
   Future<String> getCurrentUId();
   Future<void> getCreateCurrentUser(UserEntity user);
   Future<void> addCard(CardEntity cardEntity);
-  Future<void> deleteCard(CardEntity cardEntity,String uid);
+  Future<void> deleteCard(CardEntity cardEntity, String uid);
   Stream<List<CardEntity>> getCards(String uid);
+  Future<UserEntity?> getSpecificUserById(String uid);
 }

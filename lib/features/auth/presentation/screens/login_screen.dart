@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
             ScaffoldMessenger.of(context)
                 .showSnackBar(const SnackBar(content: Text("Welcom To you")));
           } else if (state is UserSucess) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LayoutScreen(uid: state.uid,)));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LayoutScreen(uid: state.uid, name: state.userEntity.name.toString(),)));
           }else if(state is UserFailure){
             ScaffoldMessenger.of(context)
                 .showSnackBar( SnackBar(content: Text(state.error.toString())));

@@ -16,6 +16,7 @@ import 'package:finjan/features/auth/domain/repository/firebase_repository.dart'
 import 'package:finjan/features/auth/domain/repository/register_repo.dart';
 import 'package:finjan/features/auth/domain/usecase/add_new_card_usecase.dart';
 import 'package:finjan/features/auth/domain/usecase/delete_card_usecase.dart';
+import 'package:finjan/features/auth/domain/usecase/get_Specific_UserById_usecase.dart';
 import 'package:finjan/features/auth/domain/usecase/get_cards.dart';
 import 'package:finjan/features/auth/domain/usecase/get_create_curren_usecase.dart';
 import 'package:finjan/features/auth/domain/usecase/get_user_current_uuid.dart';
@@ -47,15 +48,19 @@ Future<void> init() async {
       signUPUsecase: sl(),
       getCreateCurrentUserUsecase: sl(),
       signInUsecase: sl(),
-      getUserCurrentUidUsecase: sl()));
+      getUserCurrentUidUsecase: sl(), getSpecificUserByIdUsecase: sl()));
   sl.registerFactory<GetCoffeCubit>(
       () => GetCoffeCubit(usecase: sl(), getUserCurrentUidUsecase: sl()));
-  sl.registerFactory<AddCardCubit>(() =>
-      AddCardCubit(addNewCardUseCase: sl(), getUserCurrentUidUsecase: sl(), ));
+  sl.registerFactory<AddCardCubit>(() => AddCardCubit(
+        addNewCardUseCase: sl(),
+        getUserCurrentUidUsecase: sl(),
+      ));
   sl.registerFactory<LayoutCubitCubit>(
       () => LayoutCubitCubit(getUserCurrentUidUsecase: sl()));
-  sl.registerFactory<GetCardsCubit>(() =>
-      GetCardsCubit(getCardsUsecase: sl(), getUserCurrentUidUsecase: sl(), deleteCardUsecase: sl()));
+  sl.registerFactory<GetCardsCubit>(() => GetCardsCubit(
+      getCardsUsecase: sl(),
+      getUserCurrentUidUsecase: sl(),
+      deleteCardUsecase: sl()));
   sl.registerFactory<CoffeeCategoryCubit>(() => CoffeeCategoryCubit(
       hotCoffeCategoryUsecase: sl(),
       icedCoffeCategoryUsecase: sl(),
@@ -81,7 +86,9 @@ Future<void> init() async {
       () => HotCoffeCategoryUsecase(getCoffeRepository: sl()));
   sl.registerLazySingleton<IcedCoffeCategoryUsecase>(
       () => IcedCoffeCategoryUsecase(getCoffeRepository: sl()));
-  sl.registerLazySingleton<DeleteCardUsecase>(() => DeleteCardUsecase(firebaseRepository: sl()));
+  sl.registerLazySingleton<DeleteCardUsecase>(
+      () => DeleteCardUsecase(firebaseRepository: sl()));
+  sl.registerLazySingleton(() => GetSpecificUserByIdUsecase(repository: sl()));
   //repository
   sl.registerLazySingleton<RegisterRepository>(
       () => RegisterRepositoryImpl(remoteDataSource: sl()));

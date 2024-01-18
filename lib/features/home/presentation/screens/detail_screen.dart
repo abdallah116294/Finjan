@@ -188,6 +188,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           )
                         ]),
                   ),
+               
                   SizedBox(
                     width: 190,
                     child: Center(
