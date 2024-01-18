@@ -7,23 +7,27 @@ import 'package:finjan/features/auth/domain/usecase/get_create_curren_usecase.da
 import 'package:finjan/features/auth/domain/usecase/get_user_current_uuid.dart';
 import 'package:finjan/features/auth/domain/usecase/sign_in_usecase.dart';
 import 'package:finjan/features/auth/domain/usecase/sign_up_usecase.dart';
+import 'package:finjan/features/auth/domain/usecase/signout_usecase.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit({
-    required this.signUPUsecase,
-    required this.getCreateCurrentUserUsecase,
-    required this.signInUsecase,
-    required this.getUserCurrentUidUsecase,
-    required this.getSpecificUserByIdUsecase,
-  }) : super(SignUpInitial());
+  SignUpCubit(
+      {required this.signUPUsecase,
+      required this.getCreateCurrentUserUsecase,
+      required this.signInUsecase,
+      required this.getUserCurrentUidUsecase,
+      required this.getSpecificUserByIdUsecase,
+      required this.signOutUseCase})
+      : super(SignUpInitial());
   final SignUPUsecase signUPUsecase;
   final SignInUsecase signInUsecase;
   final GetCreateCurrentUserUsecase getCreateCurrentUserUsecase;
   final GetUserCurrentUidUsecase getUserCurrentUidUsecase;
   final GetSpecificUserByIdUsecase getSpecificUserByIdUsecase;
+  SignOutUseCase signOutUseCase;
   Future<void> submitSignIn({required UserEntity userEntity}) async {
     emit(UserLoading());
     try {
@@ -53,6 +57,14 @@ class SignUpCubit extends Cubit<SignUpState> {
       emit(UserFailure(error: error.toString()));
     } catch (error) {
       emit(UserFailure(error: error.toString()));
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await signOutUseCase.call();
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 }

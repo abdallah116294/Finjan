@@ -26,7 +26,7 @@ class HotCategoryScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: AppColor.backgroundColor,
               centerTitle: true,
-              title: const Text("Iced Coffe "),
+              title: const Text("Hot Coffe "),
             ),
             body: Column(
               children: [

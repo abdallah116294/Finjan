@@ -1,4 +1,6 @@
 import 'package:finjan/core/utils/appcolor.dart';
+import 'package:finjan/features/auth/presentation/cubit/cubit/sign_up_cubit.dart';
+import 'package:finjan/features/auth/presentation/screens/login_screen.dart';
 import 'package:finjan/features/home/presentation/screens/home.dart';
 import 'package:finjan/features/home/presentation/widgets/titles_widget.dart';
 import 'package:finjan/features/layout/screens/cubit/layout_cubit_cubit.dart';
@@ -130,8 +132,19 @@ class _LayoutScreenState extends State<LayoutScreen> {
                       _handleMenuButtonPressed();
                     });
                   },
-                  leading: const Icon(Icons.home),
+                  leading: const Icon(Icons.shopping_cart),
                   title: const Text('Orders'),
+                ),
+                ListTile(
+                  onTap: () {
+                    BlocProvider.of<SignUpCubit>(context)
+                        .signOut()
+                        .then((value) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>LoginScreen(email: '', password: '')));
+                    });
+                  },
+                  leading: const Icon(Icons.logout),
+                  title: const Text('Logout'),
                 ),
               ],
             )),

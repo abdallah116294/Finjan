@@ -1,5 +1,6 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:finjan/core/utils/appcolor.dart';
+import 'package:finjan/features/auth/presentation/widgets/custom_button.dart';
 import 'package:finjan/features/home/domain/entity/card_entity.dart';
 import 'package:finjan/features/home/presentation/cubit/add_card_cubit.dart';
 import 'package:finjan/features/home/presentation/widgets/subtitle_widget.dart';
@@ -72,6 +73,7 @@ class _DetailScreenState extends State<DetailScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               backgroundColor: AppColor.backgroundColor,
               title: Text(
                 widget.coffeeName,
@@ -207,17 +209,8 @@ class _DetailScreenState extends State<DetailScreen> {
                           )
                         ]),
                   ),
-
-                  SizedBox(
-                    width: 190.w,
-                    child: Center(
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: borderColor,
-                              shape: ContinuousRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20))),
-                          onPressed: () {
-                            debugPrint(slecetedSize);
+                   CustomButton(color: borderColor,action: "ADD",style:  TextStyle(color: Colors.white,fontSize: 22.sp),width: 150,onPressed: (){
+                                                 debugPrint(slecetedSize);
                             BlocProvider.of<AddCardCubit>(context)
                                 .addCard(
                                     cardEntity: CardEntity(
@@ -231,14 +224,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('Done')));
                             });
-                          },
-                          child: Text("ADD",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.bold))),
-                    ),
-                  )
+                   },)
                 ],
               ),
             ),
@@ -267,6 +253,14 @@ class ChooseSizeWidget extends StatelessWidget {
       width: 91,
       height: 36,
       decoration: ShapeDecoration(
+        shadows : [
+              BoxShadow(
+                color:isClicked? Color(0x3F000000):Colors.white,
+                blurRadius: 7,
+                offset: Offset(2, 1),
+                spreadRadius: 0,
+              )
+            ],
         color: Colors.white,
         shape: RoundedRectangleBorder(
           side: BorderSide(

@@ -89,18 +89,20 @@ class HomeSmallProductCard extends StatelessWidget {
                                 ),
                               ),
                                Positioned(
-                                left: 10.w,
+                                left: 7.w,
                                 top: 8.h,
                                 //top: ,
-                                child: Text(
-                                  '4.9',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12.sp,
-                                    fontFamily: 'Lato',
-                                    fontWeight: FontWeight.w300,
-                                    height: 0.19,
+                                child: Center(
+                                  child: Text(
+                                    '4.9⭐',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.sp,
+                                      fontFamily: 'Lato',
+                                      fontWeight: FontWeight.w300,
+                                      height: 0.19,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -165,15 +167,15 @@ class HomeSmallProductCard extends StatelessWidget {
                     onPresed();
                   },
                   child: Container(
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
                     width: 30.h,
                     height: 30.w,
                     decoration: const ShapeDecoration(
                       color: Color(0xFF835F45),
                       shape: OvalBorder(),
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
                     ),
                   ),
                 ),

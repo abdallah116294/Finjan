@@ -23,6 +23,7 @@ import 'package:finjan/features/auth/domain/usecase/get_user_current_uuid.dart';
 import 'package:finjan/features/auth/domain/usecase/register_usecase.dart';
 import 'package:finjan/features/auth/domain/usecase/sign_in_usecase.dart';
 import 'package:finjan/features/auth/domain/usecase/sign_up_usecase.dart';
+import 'package:finjan/features/auth/domain/usecase/signout_usecase.dart';
 import 'package:finjan/features/auth/presentation/cubit/cubit/sign_up_cubit.dart';
 import 'package:finjan/features/auth/presentation/cubit/register_cubit.dart';
 import 'package:finjan/features/home/data/remote_data/remote_data.dart';
@@ -48,7 +49,8 @@ Future<void> init() async {
       signUPUsecase: sl(),
       getCreateCurrentUserUsecase: sl(),
       signInUsecase: sl(),
-      getUserCurrentUidUsecase: sl(), getSpecificUserByIdUsecase: sl()));
+      getUserCurrentUidUsecase: sl(),
+      getSpecificUserByIdUsecase: sl(), signOutUseCase: sl()));
   sl.registerFactory<GetCoffeCubit>(
       () => GetCoffeCubit(usecase: sl(), getUserCurrentUidUsecase: sl()));
   sl.registerFactory<AddCardCubit>(() => AddCardCubit(
@@ -89,6 +91,7 @@ Future<void> init() async {
   sl.registerLazySingleton<DeleteCardUsecase>(
       () => DeleteCardUsecase(firebaseRepository: sl()));
   sl.registerLazySingleton(() => GetSpecificUserByIdUsecase(repository: sl()));
+  sl.registerLazySingleton(() => SignOutUseCase(repository: sl()));
   //repository
   sl.registerLazySingleton<RegisterRepository>(
       () => RegisterRepositoryImpl(remoteDataSource: sl()));

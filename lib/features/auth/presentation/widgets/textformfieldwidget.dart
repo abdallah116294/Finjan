@@ -27,7 +27,7 @@ class CustomTextFormFiled extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onTap: onPresed,
-      style:  TextStyle(color: AppColor.backgroundColor,fontSize: 18.sp),
+      style:  TextStyle(color: Colors.white,fontSize: 18.sp),
       onChanged: onchange,
       obscureText: isObscureText!,
       validator: validator,
@@ -38,17 +38,17 @@ class CustomTextFormFiled extends StatelessWidget {
               borderSide: const BorderSide(color: AppColor.error)),
           disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
-              borderSide: const BorderSide(color: AppColor.backgroundColor)),
+              borderSide: const BorderSide(color: Colors.white)),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
-              borderSide: const BorderSide(color: AppColor.backgroundColor)),
+              borderSide: const BorderSide(color: Colors.white)),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
-              borderSide: const BorderSide(color: AppColor.backgroundColor)),
+              borderSide: const BorderSide(color: Colors.white)),
         contentPadding:const  EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-
-          label: Text('$inputFiled'),
-          prefixIcon: Icon(prefixIcon,color: AppColor.backgroundColor,size: 18.w,),
+           fillColor:Colors.white ,
+          label: Text('$inputFiled',style:const  TextStyle(color: Colors.white,),),
+          prefixIcon: Icon(prefixIcon,color: Colors.white,size: 18.w,),
           ),
     );
   }

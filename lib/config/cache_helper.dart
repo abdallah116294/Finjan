@@ -1,7 +1,7 @@
 // class CacheHelper {
 //   static SharedPreferences? sharedPreferences;
 //   static init() async {
-//     sharedPreferences = await SharedPreferences.getInstance();
+//     sharedPreferences = await sharedPreferences.getInstance();
 //   }
 //   static Future<bool>saveData({
 //     required String key,
