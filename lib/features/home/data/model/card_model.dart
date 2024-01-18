@@ -8,19 +8,24 @@ class CardModel extends CardEntity {
     final String? cardImage,
     final int? cardPrice,
     final String? uid,
+    final String? size,
   }) : super(
             cardId: cardId,
             cardName: cardName,
             cardImage: cardImage,
             cardPrice: cardPrice,
-            uid: uid);
+            uid: uid,
+            size: size
+            );
   factory CardModel.fromSnapShot(DocumentSnapshot documentSnapshot) {
     return CardModel(
         cardId: documentSnapshot.get('cardId'),
         cardName: documentSnapshot.get('cardName'),
         cardImage: documentSnapshot.get('cardImage'),
         cardPrice: documentSnapshot.get('cardPrice'),
-        uid: documentSnapshot.get('uid'));
+        uid: documentSnapshot.get('uid'),
+        size: documentSnapshot.get("size")
+        );
   }
   Map<String, dynamic> toDocumnet() {
     return {
@@ -28,7 +33,8 @@ class CardModel extends CardEntity {
       "cardName":cardName,
       "cardId":cardId,
       "cardImage":cardImage,
-      "cardPrice":cardPrice
+      "cardPrice":cardPrice,
+      'size':size
     };
   }
 }

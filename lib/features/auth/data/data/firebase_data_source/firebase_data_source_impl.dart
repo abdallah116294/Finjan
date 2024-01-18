@@ -77,4 +77,16 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
       return event.docs.map((e) => CardModel.fromSnapShot(e)).toList();
     });
   }
+
+  @override
+  Future<void> deleteCard(CardEntity cardEntity,String uid) async {
+    final carddCollectionRef =
+        firestore.collection('users').doc(uid).collection("cards");
+    carddCollectionRef.doc(cardEntity.cardId).get().then((value) {
+      if (value.exists) {
+        carddCollectionRef.doc(cardEntity.cardId).delete();
+      }
+      return;
+    });
+  }
 }

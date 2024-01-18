@@ -13,7 +13,8 @@ final class CoffeeCategoryLoading extends CoffeeCategoryState {}
 
 final class CoffeeCategorySucces extends CoffeeCategoryState {
   List<CoffeCategory> coffeCategory;
-  CoffeeCategorySucces({required this.coffeCategory});
+  String uid;
+  CoffeeCategorySucces({required this.coffeCategory,required this.uid});
 }
 
 final class CoffeeCategoryError extends CoffeeCategoryState {}

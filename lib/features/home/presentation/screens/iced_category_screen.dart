@@ -70,7 +70,7 @@ class IcedCategoryScreen extends StatelessWidget {
                                       .toString() , imageUrl: state.coffeCategory[index].image
                                       .toString(), coffePrice: 22, kind: state.coffeCategory[index].ingredients!.first
                                       .toString(), description: state.coffeCategory[index].description
-                                      .toString(), uid: '')));
+                                      .toString(), uid: state.uid)));
                       },child: CategoryCoffeWidget(imageUrl: state.coffeCategory[index].image.toString(), name: state.coffeCategory[index].title.toString(),));
                     }),
               )

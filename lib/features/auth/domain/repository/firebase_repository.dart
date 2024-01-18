@@ -10,4 +10,5 @@ abstract class FirebaseRepository {
   Future<void> getCreateCurrentUser(UserEntity user);
   Future<void> addNewCard(CardEntity cardEntity);
   Stream<List<CardEntity>> getCards(String uid);
+  Future<void> deleteCard(CardEntity cardEntity,String uid);
 }
