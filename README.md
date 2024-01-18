@@ -14,7 +14,7 @@ Finjan (فنجان) is a Flutter mobile application that allows users to explore
 
 ## Screenshots
 
-![Screenshot 1](screenshots/screenshot_1.png)
+![Screenshot 1](assets/finjan1.jpeg)
 ![Screenshot 2](screenshots/screenshot_2.png)
 <!-- Add more screenshots as needed -->
 
