@@ -16,7 +16,7 @@ class AppMethods {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             backgroundColor: Theme.of(context).dialogBackgroundColor,
             content: Column(mainAxisSize: MainAxisSize.min, children: [
-              Image.network(
+              Image.asset(
                 imagePathe,
                 height: 60.h,
                 width: 60.w,

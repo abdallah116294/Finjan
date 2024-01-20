@@ -94,7 +94,7 @@ class HomeSmallProductCard extends StatelessWidget {
                                 //top: ,
                                 child: Center(
                                   child: Text(
-                                    '4.9⭐',
+                                    '4.9',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.white,

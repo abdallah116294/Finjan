@@ -1,0 +1,4 @@
+class AppConstants {
+  static const String paymobApiKey =
+      "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T0RneE9UazVMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuMTVYRjdYd0ItUElrQWZkUkZOX1FvSTZCZmJLZVBDaHpaUWI5R3pXbG1TaUxXUzRIVlhfbFVSMGlMcGIwUHA3bG1xejB3NWxIUFBwNFE5cDh4a0U0anc=";
+}
